@@ -7,7 +7,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 2.5rem;
+  /* gap: 0.2rem; */
   border-radius: 9px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
@@ -17,6 +17,7 @@
 .header {
   align-self: center;
   background: linear-gradient(to right, #a1c4fd, #1e3c72);
+  /* background: linear-gradient(135deg, #2a5298 0%, #3b6cb7 50%, #2d2d5a 100%); */
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -29,7 +30,8 @@
 }
 .form-cotnainer input {
   width: 100%;
-  height: 1.8rem;
+  height: 2.5rem;
+  margin-top: 0.9rem;
   padding: 5px;
   border: none;
   border-bottom: 1px solid rgb(167, 167, 167);
@@ -46,11 +48,13 @@
   color: #1a365d;
   background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
   cursor: pointer;
-  transition: background-position 0.5s ease, color 0.5s ease-in-out,
+  transition: background-position 0.5s ease, color 0.4s ease-in-out,
     background-color 0.4s ease;
+  margin-top: 1.5rem;
 }
 .signup-button:hover {
-  background: #2c5282;
+  /* background: #2c5282; */
+  background: linear-gradient(135deg, #3b6cb7 0%, #4a7fc9 50%, #3d3d7a 100%);
   /* background-position: left bottom; */
   color: white;
 }
