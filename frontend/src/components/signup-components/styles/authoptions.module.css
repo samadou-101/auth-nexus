@@ -1,0 +1,36 @@
+.auth-options-container {
+  /* max-height: fit-content; */
+  width: 100%;
+  border-top-right-radius: 9px;
+  border-top-left-radius: 9px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* border: 1px solid black; */
+}
+.select {
+  width: 7.3rem;
+  height: 2.5rem;
+  text-align: center;
+  outline: none;
+  cursor: pointer;
+  border: nonef;
+}
+.session,
+.jwt,
+.oauth {
+  /* height: 100%; */
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.2s ease-in;
+  /* background-color: cyan; */
+}
+.session {
+  /* background: linear-gradient(to right, #a1c4fd, #1e3c72); */
+}
