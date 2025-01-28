@@ -1,10 +1,12 @@
-import React, { useState } from "react";
 import style from "./styles/authoptions.module.css";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks/redux-hooks";
+import { selectTab } from "../../redux/slices/authTabSlice";
 
 const AuthOptions = () => {
-  const [divSelected, setSelectedDiv] = useState<number>(0);
-  const handleTabClick = (index: number) => {
-    setSelectedDiv(index);
+  const selectedTab = useAppSelector((state) => state.authOption.selectedTab);
+  const dispatch = useAppDispatch();
+  const handleTabClick = (index: 0 | 1 | 2) => {
+    dispatch(selectTab(index));
   };
   return (
     <div className={style["auth-options-container"]}>
@@ -13,10 +15,10 @@ const AuthOptions = () => {
         onClick={() => handleTabClick(0)}
         style={{
           background:
-            divSelected == 0
+            selectedTab == 0
               ? " linear-gradient(to right, #a1c4fd, #1e3c72)"
               : "white",
-          color: divSelected == 0 ? "white" : "black",
+          color: selectedTab == 0 ? "white" : "black",
         }}
       >
         Session
@@ -26,10 +28,10 @@ const AuthOptions = () => {
         onClick={() => handleTabClick(1)}
         style={{
           background:
-            divSelected == 1
+            selectedTab === 1
               ? " linear-gradient(to right, #a1c4fd, #1e3c72)"
               : "white",
-          color: divSelected == 1 ? "white" : "black",
+          color: selectedTab === 1 ? "white" : "black",
         }}
       >
         JWT
@@ -39,10 +41,10 @@ const AuthOptions = () => {
         onClick={() => handleTabClick(2)}
         style={{
           background:
-            divSelected == 2
+            selectedTab === 2
               ? " linear-gradient(to right, #a1c4fd, #1e3c72)"
               : "white",
-          color: divSelected == 2 ? "white" : "black",
+          color: selectedTab === 2 ? "white" : "black",
         }}
       >
         OAuth2
