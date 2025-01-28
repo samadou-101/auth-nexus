@@ -1,7 +1,7 @@
 import style from "./styles/signup.module.css";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { object, string } from "yup";
-import { yupResolver } from "@hookform/resolvers/yup/src/yup.js";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 interface Inputs {
   firstName: string;
@@ -12,18 +12,23 @@ interface Inputs {
 }
 
 const SignupForm: React.FC = () => {
-  const inputSchema = object({
-    firstName: string().required().min(3).max(25),
-    lastName: string().required().min(3).max(25),
-    email: string().email().required(),
-    password: string().required().min(8).max(30),
-    confirmPassword: string().required().min(8).max(30),
-  });
+  const inputSchema = z
+    .object({
+      firstName: z.string().min(3).max(25),
+      lastName: z.string().min(3).max(25),
+      email: z.string().email(),
+      password: z.string().min(8).max(30),
+      confirmPassword: z.string().min(8).max(30),
+    })
+    .refine((data) => data.password === data.confirmPassword, {
+      message: "Password mismatch",
+      path: ["confirmPassword"],
+    });
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ resolver: yupResolver(inputSchema) });
+  } = useForm<Inputs>({ resolver: zodResolver(inputSchema) });
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     console.log(data);
   };
@@ -31,11 +36,7 @@ const SignupForm: React.FC = () => {
     <form onSubmit={handleSubmit(onSubmit)} className={style["form-cotnainer"]}>
       <h1 className={style["header"]}>Auth Nexus</h1>
       <input
-        {...register("firstName", {
-          required: true,
-          minLength: { value: 2, message: "Min length is 2 characters" },
-          maxLength: { value: 25, message: "Max length is 25 characters" },
-        })}
+        {...register("firstName")}
         id="firstName"
         type="text"
         placeholder="firstName"
@@ -55,11 +56,7 @@ const SignupForm: React.FC = () => {
         </span>
       )}
       <input
-        {...register("lastName", {
-          required: true,
-          minLength: { value: 2, message: "Min length is 2 characters" },
-          maxLength: { value: 25, message: "Max length is 25 characters" },
-        })}
+        {...register("lastName")}
         id="lastName"
         type="text"
         placeholder="Last Name"
@@ -79,24 +76,65 @@ const SignupForm: React.FC = () => {
         </span>
       )}
       <input
-        {...register("email", { required: true })}
+        {...register("email")}
         id="email"
         type="text"
         placeholder="Email"
       />
-
+      {errors.email && (
+        <span
+          role="alert"
+          style={{
+            color: "red",
+            opacity: ".8",
+            fontWeight: "400",
+            fontSize: "14px",
+            marginTop: "2px",
+          }}
+        >
+          {errors.email.message}
+        </span>
+      )}
       <input
-        {...register("password", { required: true, min: 8, max: 30 })}
+        {...register("password")}
         id="password"
         type="password"
         placeholder="Password"
       />
+      {errors.password && (
+        <span
+          role="alert"
+          style={{
+            color: "red",
+            opacity: ".8",
+            fontWeight: "400",
+            fontSize: "14px",
+            marginTop: "2px",
+          }}
+        >
+          {errors.password.message}
+        </span>
+      )}
       <input
-        {...register("confirmPassword", { required: true, min: 8, max: 30 })}
+        {...register("confirmPassword")}
         id="confirmPassword"
         type="password"
         placeholder="Confirm Password"
-      />
+      />{" "}
+      {errors.confirmPassword && (
+        <span
+          role="alert"
+          style={{
+            color: "red",
+            opacity: ".8",
+            fontWeight: "400",
+            fontSize: "14px",
+            marginTop: "2px",
+          }}
+        >
+          {errors.confirmPassword.message}
+        </span>
+      )}
       <button type="submit" className={style["signup-button"]}>
         Sign Up
       </button>
