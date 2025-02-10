@@ -5,7 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node --no-warnings --loader ts-node/esm ./src/server.ts",
+    "dev": "nodemon",
+    "start": "node --loader ts-node/esm src/server.ts",
     "build": "tsc && node scripts/add-js-extension.js"
   },
   "dependencies": {
@@ -23,6 +24,10 @@
     "@types/express-session": "^1.18.1",
     "@types/mongoose": "^5.11.97",
     "@types/node": "^22.13.1",
+    "nodemon": "^3.1.9",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "tsx": "^4.19.2",
     "typescript": "^5.7.3"
   }
 }
