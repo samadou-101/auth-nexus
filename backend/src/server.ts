@@ -6,7 +6,6 @@ import authRouter from "./routes/auth/auth-routes";
 import { connectDB } from "./config/db";
 import sessionRouter from "./routes/auth/session/session-routes";
 const app = express();
-
 app.use(express.json());
 app.use(sessionMiddleware);
 
